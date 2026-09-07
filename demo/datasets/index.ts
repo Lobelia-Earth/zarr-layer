@@ -41,6 +41,24 @@ export const DATASETS: Dataset<any>[] = [
     maxTime: 729,
   }),
   createTimeDataset({
+    id: 'cerra_cmip6_nhw99p',
+    source:
+      'https://s3.waw3-1.cloudferro.com/lobelia-public-arco/eib-prototype/v0.7/cmip6/dtx35/timeChunked.zarr',
+    variable: 'dtx35',
+    clim: [0, 6.366666793823242],
+    colormap: 'fire',
+    zarrVersion: 2,
+    maxTime: 6,
+    timeSelectorType: 'index',
+    info: 'CERRA + CMIP6 nhw99p (EPSG:4326)',
+    sourceInfo:
+      'Count of occurrences that a period of at least three consecutive days on which the maximum temperature exceeds the 99th percentile of the daily TX of the control period of 1991 to 2020. The zeroth time index is CERRA reference data. Each subsequent time index is a CMIP6 RCP8.5 forecast over 30-year windows in 10-year increments, starting with 2035 +/-15 years.',
+    selector: {
+      scenario: 'rcp85',
+      quantile: 0.5,
+    },
+  }),
+  createTimeDataset({
     id: 'delta_fg_co2',
     source:
       'https://carbonplan-oae-efficiency.s3.us-west-2.amazonaws.com/fgco2-2021-180x360.zarr',

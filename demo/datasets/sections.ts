@@ -20,6 +20,7 @@ export const SELECTOR_SECTIONS: SelectorSection[] = [
       'polar_antarctic',
       'antarctic_era5',
       'hrrr_weather',
+      'cerra_cmip6_nhw99p',
     ],
   },
   {
