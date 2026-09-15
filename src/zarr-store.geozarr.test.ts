@@ -498,11 +498,11 @@ describe('bounds from the spatial: convention', () => {
   })
 
   it('does not snap a node-registered global grid onto the antimeridian', async () => {
-    // Previously, we combined floating point error mitigation with snapping
-    // global grids (even node-registered ones) to a -180/180 extent. However,
-    // this created new problems wherein node-registered datasets were being
-    // rendered half a grid cell off longitudinally from where they should have
-    // been.
+    // Node registration puts this grid's edges at -202.5..157.5, a full
+    // 360 deg of coverage offset by half a cell. Node registration
+    // means the longitudinal values are at the center of the cell, so
+    // the half-cell offset is to be expected. Snapping to -180/180 in
+    // this case would result in a rendering inaccuracy.
     const { d } = await describeSpatialStore({
       'spatial:transform': GLOBAL_TRANSFORM,
       'spatial:registration': 'node',

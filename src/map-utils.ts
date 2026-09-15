@@ -111,10 +111,11 @@ export interface XYLimits {
  * Put a longitude extent into the -180–180 representation the renderer works in.
  * Only meaningful for a geographic CRS; callers hold that check.
  *
- * Two corrections, neither of them a judgment about the source. A 0–360 extent is
- * folded, since that convention is just as correct and xarray writes it. A global
- * extent landing within `1e-3` of ±180 is snapped onto it, which is what keeps a
- * seam from opening at the antimeridian when the grid doesn't divide evenly.
+ * Two corrections, neither of them a judgment about the source. A 0–360
+ * extent is folded, since that convention is just as correct and xarray
+ * writes it. A global extent landing within `Math.min(1e-3, cellWidth /
+ * 4)` of ±180 is snapped onto it, which is what keeps a seam from
+ * opening at the antimeridian when the grid doesn't divide evenly.
  *
  * @param cellWidth - Longitude span of one cell, the tolerance for both checks.
  */
@@ -123,7 +124,7 @@ export function normalizeLongitudeExtent(
   xMax: number,
   cellWidth: number
 ): { xMin: number; xMax: number } {
-  const tolerance = 1e-3
+  const tolerance = Math.min(1e-3, cellWidth / 4)
 
   let lo = xMin
   let hi = xMax
